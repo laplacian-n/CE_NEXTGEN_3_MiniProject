@@ -26,19 +26,20 @@ Servo myservo;
 
 MFRC522 rfid(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
-// TODO 1 : ตั้งค่า WIFI & PASSWORD, Topic RFID/Servo/Car
+// TODO 1 : ตั้งชื่อกลุ่ม (ภาษาอังกฤษ ไม่มีเว้นวรรค ห้ามซ้ำกลุ่มอื่น) แล้วใช้ชื่อเดียวกันใน Node-RED
+#define GROUP_NAME "groupname"
 //=================================================================================================
 WiFiClient   espClient;                     //คำสั่งจาก library
 PubSubClient client(espClient);             //สร้างออปเจ็ค สำหรับเชื่อมต่อ mqtt
 //=================================================================================================
-const char* ssid = "wifi name";                   //wifi name
-const char* password = "wifi password";           //wifi password
+const char* ssid = "CEnextgen#3";                 //wifi name
+const char* password = "CEnextgen#3";             //wifi password
 //=================================================================================================
-const char* mqtt_broker = "IP mqtt server";       //IP mqtt server
-const int   mqtt_port = port mqtt server;         //port mqtt server
-const char* topic_rfid = "groupname/rfid";        //Topic for RFID
-const char* topic_servo = "groupname/servo";      //Topic for control servo
-const char* topic_car = "groupname/car";          //Topic for sending notification if car was hit
+const char* mqtt_broker = "broker.emqx.io";       //IP mqtt server
+const int   mqtt_port = 1883;                     //port mqtt server
+const char* topic_rfid = "CENEXTGEN3/" GROUP_NAME "/rfid";     //Topic for RFID
+const char* topic_servo = "CENEXTGEN3/" GROUP_NAME "/servo";   //Topic for control servo
+const char* topic_car = "CENEXTGEN3/" GROUP_NAME "/car";       //Topic for sending notification if car was hit
 //=================================================================================================
 const int DOOR_OPEN_ANGLE = 180;
 const int DOOR_CLOSE_ANGLE = 0;
@@ -117,7 +118,7 @@ void setup()
   setup_wifi(); //เชื่อมต่อwifi
   reconnect();  //เชื่อมต่อmqtt
   client.subscribe(topic_servo);  //กำหนด topic ที่จะ subscribe
-  client.publish(topic_rfid, "กรุณาสแกน RFID เพื่อยืนยันตัวตน (ชื่อกลุ่ม)"); //กำหนด topic ที่จะ publish 
+  client.publish(topic_rfid, "กรุณาสแกน RFID เพื่อยืนยันตัวตน (" GROUP_NAME ")"); //กำหนด topic ที่จะ publish
 
   // SPI ของ RC522
   SPI.begin(SCK_PIN, MISO_PIN, MOSI_PIN, SS_PIN);

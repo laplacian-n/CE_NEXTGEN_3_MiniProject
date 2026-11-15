@@ -8,22 +8,170 @@
         "env": []
     },
     {
+        "id": "fdb5bd847372c86a",
+        "type": "mqtt-broker",
+        "name": "broker.emqx.io",
+        "broker": "broker.emqx.io",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "82a1cb891bc4ec7a",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "572197ad873b1c72",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "abcd6ca58075cb0d",
+        "type": "ui_group",
+        "name": "CE NEXT GEN",
+        "tab": "82a1cb891bc4ec7a",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "c9dd7da7d2cc3a9a",
         "type": "mqtt in",
         "z": "3814150a5ea8e260",
         "name": "",
-        "topic": "",
+        "topic": "CENEXTGEN3/groupname/rfid",
         "qos": "2",
         "datatype": "auto-detect",
+        "broker": "fdb5bd847372c86a",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 390,
+        "x": 330,
         "y": 240,
         "wires": [
             [
-                "a061859972ea423e"
+                "a061859972ea423e",
+                "671347cf983a5bb0"
             ]
         ]
     },
@@ -31,8 +179,8 @@
         "id": "a061859972ea423e",
         "type": "function",
         "z": "3814150a5ea8e260",
-        "name": "function 18",
-        "func": "\nreturn msg;",
+        "name": "UID เป็นชื่อ",
+        "func": "// วางโค้ดจากสไลด์ Session 2\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -51,19 +199,20 @@
         "id": "43028842bcf07206",
         "type": "ui_text",
         "z": "3814150a5ea8e260",
+        "group": "abcd6ca58075cb0d",
         "order": 0,
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "text",
+        "label": "ผู้สแกนบัตร",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
-        "color": "#000",
-        "x": 830,
+        "color": "#000000",
+        "x": 850,
         "y": 240,
         "wires": []
     },
@@ -72,22 +221,23 @@
         "type": "ui_button",
         "z": "3814150a5ea8e260",
         "name": "",
-        "order": 0,
+        "group": "abcd6ca58075cb0d",
+        "order": 1,
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "button",
+        "label": "เปิดไม้กั้น",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
         "className": "",
         "icon": "",
-        "payload": "",
+        "payload": "open",
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 390,
-        "y": 360,
+        "x": 380,
+        "y": 340,
         "wires": [
             [
                 "18034c4d255cd10d"
@@ -99,7 +249,7 @@
         "type": "mqtt out",
         "z": "3814150a5ea8e260",
         "name": "",
-        "topic": "",
+        "topic": "CENEXTGEN3/groupname/servo",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -107,8 +257,9 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "x": 590,
-        "y": 360,
+        "broker": "fdb5bd847372c86a",
+        "x": 670,
+        "y": 340,
         "wires": []
     },
     {
@@ -116,14 +267,15 @@
         "type": "mqtt in",
         "z": "3814150a5ea8e260",
         "name": "",
-        "topic": "",
+        "topic": "CENEXTGEN3/groupname/car",
         "qos": "2",
         "datatype": "auto-detect",
+        "broker": "fdb5bd847372c86a",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 390,
+        "x": 330,
         "y": 440,
         "wires": [
             [
@@ -155,15 +307,15 @@
         "id": "a0485e4cda16c911",
         "type": "function",
         "z": "3814150a5ea8e260",
-        "name": "function 19",
-        "func": "\nreturn msg;",
+        "name": "แจ้งเตือนรถชน",
+        "func": "// วางโค้ดจากสไลด์ Session 3\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
+        "x": 850,
         "y": 440,
         "wires": [
             [
@@ -179,9 +331,10 @@
         "type": "ui_audio",
         "z": "3814150a5ea8e260",
         "name": "",
+        "group": "abcd6ca58075cb0d",
         "voice": "",
         "always": "",
-        "x": 1040,
+        "x": 1060,
         "y": 500,
         "wires": []
     },
@@ -189,20 +342,38 @@
         "id": "c20a20da8b37714b",
         "type": "ui_text",
         "z": "3814150a5ea8e260",
-        "order": 0,
+        "group": "abcd6ca58075cb0d",
+        "order": 2,
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "text",
+        "label": "แจ้งเตือน",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
-        "color": "#000",
-        "x": 1030,
+        "color": "#000000",
+        "x": 1060,
         "y": 420,
+        "wires": []
+    },
+    {
+        "id": "671347cf983a5bb0",
+        "type": "debug",
+        "z": "3814150a5ea8e260",
+        "name": "debug RFID",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 140,
         "wires": []
     }
 ]
