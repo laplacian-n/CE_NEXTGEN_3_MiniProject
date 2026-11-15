@@ -13,7 +13,6 @@
 |---|---|
 | `miniproject/miniproject.ino` | โค้ดตั้งต้น ใส่ขา, WiFi, broker ไว้ให้แล้ว เหลือตั้งชื่อกลุ่มกับใส่ username/password ของ MQTT (TODO 1) และ TODO 2–10 |
 | `debug/` | เครื่องมือหาปัญหา แยกเป็น `hardware/` (โค้ดเช็คอุปกรณ์บนบอร์ด), `network/` (เช็คการต่อ MQTT broker), `nodered/` (เช็ค/ติดตั้ง Node-RED) ดูวิธีใช้ใน [debug/README.md](debug/README.md) ผลเป็นภาษาอังกฤษ |
-| `ultrasonics/ultrasonics.ino` | โค้ดทดลองวัดระยะด้วย HC-SR04 อย่างเดียว |
 | `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า dashboard ไว้แล้ว เหลือเลือก Server, แก้ชื่อกลุ่ม และวางโค้ดใน function |
 | `solution/` | เฉลย |
 
