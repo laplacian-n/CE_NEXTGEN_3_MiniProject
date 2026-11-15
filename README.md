@@ -12,14 +12,10 @@
 | ไฟล์ | ใช้ทำอะไร |
 |---|---|
 | `miniproject/miniproject.ino` | โค้ดตั้งต้น ใส่ขา, WiFi, broker ไว้ให้แล้ว เหลือตั้งชื่อกลุ่มกับใส่ username/password ของ MQTT (TODO 1) และ TODO 2–10 |
-| `debug/debug.ino` | เช็คอุปกรณ์ทุกตัว (RFID, Servo, Ultrasonic, LED, Buzzer, WiFi + MQTT) ผลเป็นภาษาอังกฤษบน Serial Monitor |
+| `debug/` | เครื่องมือหาปัญหา แยกเป็น `hardware/` (โค้ดเช็คอุปกรณ์บนบอร์ด), `network/` (เช็คการต่อ MQTT broker), `nodered/` (เช็ค/ติดตั้ง Node-RED) ดูวิธีใช้ใน [debug/README.md](debug/README.md) ผลเป็นภาษาอังกฤษ |
 | `ultrasonics/ultrasonics.ino` | โค้ดทดลองวัดระยะด้วย HC-SR04 อย่างเดียว |
 | `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า dashboard ไว้แล้ว เหลือเลือก Server, แก้ชื่อกลุ่ม และวางโค้ดใน function |
 | `solution/` | เฉลย |
-| `tools/test_broker.py` | เช็คว่าเน็ตต่อ MQTT broker พอร์ต 1883 ได้ไหม |
-| `tools/test_mqtt.py` | เช็ค broker ที่ต้องใช้ username/password ได้ทั้งแบบ `mqtt://` (พอร์ต 1883 แบบเดียวกับ ESP32) และ `wss://` (แบบ MQTTX / Node-RED) |
-| `tools/listen_topic.py` | ดักฟังข้อความใน topic ดูว่าบอร์ดส่งข้อความออกมาจริงไหม |
-| `tools/rfid_check/` | เช็คเครื่องอ่าน RFID ทีละขั้น บอกว่าต้องแก้สายเส้นไหน |
 
 ## อุปกรณ์และ Library
 
@@ -67,17 +63,8 @@ Arduino IDE: เลือกบอร์ด **ESP32 Dev Module** แล้วต
    (หรือเปิด `flows.json` ด้วย Notepad กด Ctrl+H แทนที่ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ทีเดียวก่อน Import)
 3. ดับเบิลคลิกกล่อง **UID to name** แล้วแทน `XXXXXXXX` ด้วย UID ของบัตรที่มีสิทธิ์เข้า (ตัวพิมพ์ใหญ่ ตามที่ขึ้นใน Serial Monitor) เพิ่มได้บรรทัดละใบ บัตรที่มีสิทธิ์จะแสดงชื่อและส่ง `open` ไปที่ topic servo ให้บอร์ดเปิดประตู (TODO 3) บัตรอื่นจะขึ้น "ไม่มีสิทธิ์" และไม่เปิด
 
-ถ้าอุปกรณ์ตัวไหนไม่ทำงาน ให้อัปโหลด `debug/debug.ino` เปิด Serial Monitor ที่ 115200 พิมพ์ `a` แล้ว Enter เพื่อเช็คอุปกรณ์ทุกตัว
+ถ้ามีอะไรไม่ทำงาน ดูตารางใน [debug/README.md](debug/README.md) ว่าใช้เครื่องมือตัวไหน เช่น
 
-ถ้าสงสัยว่าเน็ตในห้องบล็อก MQTT ไหม ให้รัน:
-
-```bash
-python tools/test_broker.py mqtt.ce-esl.com 1883
-```
-
-ถ้า broker ต้องใช้ username/password (password จะถามตอนรัน ไม่ต้องพิมพ์ลงในคำสั่ง):
-
-```bash
-python tools/test_mqtt.py mqtt://mqtt.ce-esl.com:1883 ชื่อผู้ใช้
-python tools/test_mqtt.py wss://mqtt.ce-esl.com:443/mqtt ชื่อผู้ใช้
-```
+- อุปกรณ์บนบอร์ดไม่ทำงาน: อัปโหลด `debug/hardware/device_check/device_check.ino` เปิด Serial Monitor ที่ 115200 พิมพ์ `a` แล้ว Enter
+- ต่อ MQTT ไม่ได้: Windows ดับเบิลคลิก `debug/network/check_mqtt.cmd`, Linux / macOS รัน `bash debug/network/check_mqtt.sh -u ชื่อผู้ใช้`
+- Node-RED ไม่ได้ติดตั้ง หรือรันไม่ได้ หาคำสั่งไม่เจอ: Windows ดับเบิลคลิก `debug/nodered/check_nodered.cmd`, Linux / macOS รัน `bash debug/nodered/check_nodered.sh`

@@ -1,4 +1,4 @@
-// debug.ino - checks every part of the mini project one by one
+// device_check.ino - checks every part of the mini project one by one
 // Open Serial Monitor at 115200 baud, then type a letter and press Enter:
 //   a = run all tests     r = RFID     s = servo      u = ultrasonic
 //   l = LED               b = buzzer   w = WiFi + MQTT broker
