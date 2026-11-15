@@ -1,0 +1,208 @@
+[
+    {
+        "id": "3814150a5ea8e260",
+        "type": "tab",
+        "label": "CE NEXT GEN #3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c9dd7da7d2cc3a9a",
+        "type": "mqtt in",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "a061859972ea423e"
+            ]
+        ]
+    },
+    {
+        "id": "a061859972ea423e",
+        "type": "function",
+        "z": "3814150a5ea8e260",
+        "name": "function 18",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "43028842bcf07206"
+            ]
+        ]
+    },
+    {
+        "id": "43028842bcf07206",
+        "type": "ui_text",
+        "z": "3814150a5ea8e260",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000",
+        "x": 830,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "daaea29bd95a2a41",
+        "type": "ui_button",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "18034c4d255cd10d"
+            ]
+        ]
+    },
+    {
+        "id": "18034c4d255cd10d",
+        "type": "mqtt out",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "x": 590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "67bac775b59b77f4",
+        "type": "mqtt in",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "6aa9fdd92f7a0e11"
+            ]
+        ]
+    },
+    {
+        "id": "6aa9fdd92f7a0e11",
+        "type": "rbe",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "a0485e4cda16c911"
+            ]
+        ]
+    },
+    {
+        "id": "a0485e4cda16c911",
+        "type": "function",
+        "z": "3814150a5ea8e260",
+        "name": "function 19",
+        "func": "\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 440,
+        "wires": [
+            [
+                "c20a20da8b37714b"
+            ],
+            [
+                "5b37812119e401e2"
+            ]
+        ]
+    },
+    {
+        "id": "5b37812119e401e2",
+        "type": "ui_audio",
+        "z": "3814150a5ea8e260",
+        "name": "",
+        "voice": "",
+        "always": "",
+        "x": 1040,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c20a20da8b37714b",
+        "type": "ui_text",
+        "z": "3814150a5ea8e260",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000",
+        "x": 1030,
+        "y": 420,
+        "wires": []
+    }
+]
