@@ -14,7 +14,7 @@
 | `miniproject/miniproject.ino` | โค้ดตั้งต้น ใส่ขา, WiFi, broker ไว้ให้แล้ว เหลือตั้งชื่อกลุ่ม (TODO 1) กับ TODO 2–10 |
 | `debug/debug.ino` | เช็คอุปกรณ์ทุกตัว (RFID, Servo, Ultrasonic, LED, Buzzer, WiFi + MQTT) ผลเป็นภาษาอังกฤษบน Serial Monitor |
 | `ultrasonics/ultrasonics.ino` | โค้ดทดลองวัดระยะด้วย HC-SR04 อย่างเดียว |
-| `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า broker / dashboard ไว้แล้ว เหลือแก้ชื่อกลุ่มกับวางโค้ดใน function |
+| `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า dashboard ไว้แล้ว เหลือเลือก Server, แก้ชื่อกลุ่ม และวางโค้ดใน function |
 | `solution/` | เฉลย |
 | `tools/test_broker.py` | เช็คว่าเน็ตต่อ MQTT broker พอร์ต 1883 ได้ไหม |
 | `tools/listen_topic.py` | ดักฟังข้อความใน topic ดูว่าบอร์ดส่งข้อความออกมาจริงไหม |
@@ -62,7 +62,7 @@ Arduino IDE: เลือกบอร์ด **ESP32 Dev Module** แล้วต
 ## เริ่มต้น
 
 1. เปิด `miniproject/miniproject.ino` แล้วแก้ **TODO 1** บรรทัดเดียว: `#define GROUP_NAME "groupname"` เป็นชื่อกลุ่ม (ภาษาอังกฤษ ไม่มีเว้นวรรค ห้ามซ้ำกลุ่มอื่น เพราะ broker เป็นสาธารณะ ใช้ร่วมกันทุกกลุ่ม)
-2. ใน Node-RED เมนู ☰ → Import → เลือก `flows.json` แล้วแก้ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ในกล่อง mqtt สีม่วงทั้ง 3 กล่องเป็นชื่อเดียวกัน → Deploy
+2. ใน Node-RED เมนู ☰ → Import → เลือก `flows.json` แล้วแก้ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ในกล่อง mqtt สีม่วงทั้ง 3 กล่องเป็นชื่อเดียวกัน และเลือก Server ของ broker (สร้างครั้งแรกด้วยปุ่ม ✏️/+ ใส่ Username / Password ในแท็บ Security) → Deploy
    (หรือเปิด `flows.json` ด้วย Notepad กด Ctrl+H แทนที่ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ทีเดียวก่อน Import)
 
 ถ้าอุปกรณ์ตัวไหนไม่ทำงาน ให้อัปโหลด `debug/debug.ino` เปิด Serial Monitor ที่ 115200 พิมพ์ `a` แล้ว Enter เพื่อเช็คอุปกรณ์ทุกตัว
