@@ -1,5 +1,5 @@
 #define TRIG_PIN 4 // ESP32 pin D4 เชื่อมต่อกับ Trig pin
-#define ECHO_PIN 15 // ESP32 pin D15 เชื่อมต่อกับ Echo pin
+#define ECHO_PIN 2 // ESP32 pin D2 เชื่อมต่อกับ Echo pin
 
 float duration_us, distance_cm;
 
