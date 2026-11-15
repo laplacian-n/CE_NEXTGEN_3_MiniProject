@@ -62,8 +62,8 @@ Arduino IDE: เลือกบอร์ด **ESP32 Dev Module** แล้วต
 ## เริ่มต้น
 
 1. เปิด `miniproject/miniproject.ino` แล้วแก้ **TODO 1** บรรทัดเดียว: `#define GROUP_NAME "groupname"` เป็นชื่อกลุ่ม (ภาษาอังกฤษ ไม่มีเว้นวรรค ห้ามซ้ำกลุ่มอื่น เพราะ broker เป็นสาธารณะ ใช้ร่วมกันทุกกลุ่ม)
-2. ใน Node-RED เมนู ☰ → Import → เลือก `flows.json` แล้วแก้ `groupname` ในกล่อง mqtt สีม่วงทั้ง 3 กล่องเป็นชื่อเดียวกัน → Deploy
-   (หรือเปิด `flows.json` ด้วย Notepad กด Ctrl+H แทนที่ `groupname` ทีเดียวก่อน Import)
+2. ใน Node-RED เมนู ☰ → Import → เลือก `flows.json` แล้วแก้ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ในกล่อง mqtt สีม่วงทั้ง 3 กล่องเป็นชื่อเดียวกัน → Deploy
+   (หรือเปิด `flows.json` ด้วย Notepad กด Ctrl+H แทนที่ `*ชื่อกลุ่มของท่านผู้ประเสริฐ*` ทีเดียวก่อน Import)
 
 ถ้าอุปกรณ์ตัวไหนไม่ทำงาน ให้อัปโหลด `debug/debug.ino` เปิด Serial Monitor ที่ 115200 พิมพ์ `a` แล้ว Enter เพื่อเช็คอุปกรณ์ทุกตัว
 
