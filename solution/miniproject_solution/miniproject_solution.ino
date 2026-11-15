@@ -19,9 +19,7 @@ String rfidUID = "";    // เอาไว้รับ UserID ที่สแก
 #define ECHO_PIN 2      // ESP32 pin D2 เชื่อมต่อกับ Echo pin (ไฟสีฟ้าบนบอร์ดจะกะพริบตอนวัดระยะ)
 
 #define ledPin 27       // Pin ของ  LED แสดงสถานะไฟ
-#define buzzerPin 13    // Pin ควบคุมการแสดง Buzzer
-#define BUZZER_ON  HIGH // โมดูล buzzer บางรุ่นเป็นแบบ LOW = ดัง ให้สลับค่าสองบรรทัดนี้
-#define BUZZER_OFF LOW
+#define buzzerPin 13    // Pin ควบคุมการแสดง Buzzer (active low: LOW = ดัง, HIGH = เงียบ)
 
 float duration_us, distance_cm;
 
@@ -107,7 +105,7 @@ void callback(char *topic, byte *payload, unsigned int length) {  //ฟังก
   Serial.println("-----------------------");
 
   if (strcmp(topic, topic_servo) == 0) {
-    // TODO 3.5 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด
+    // TODO 3 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด (Node-RED ส่งมาเมื่อบัตรมีสิทธิ์)
     if (message == "open") {
       openDoor();
       delay(2000);
@@ -162,7 +160,7 @@ void setup()
 
   // Buzzer
   pinMode(buzzerPin, OUTPUT);
-  digitalWrite(buzzerPin, BUZZER_OFF);
+  digitalWrite(buzzerPin, HIGH);  // HIGH = เงียบ
 }
 
 void loop()
@@ -189,11 +187,6 @@ void loop()
       // TODO 2 : ส่งรหัส RFID ที่สแกนได้ไปยัง Topic 'topic_rfid'
       client.publish(topic_rfid, scannedUID.c_str());
 
-      // TODO 3 : เปิดประตู 2 วินาที และปิด
-      openDoor();
-      delay(2000);
-      closeDoor();
-
       // หยุดการ์ดใบนี้
       rfid.PICC_HaltA();
       rfid.PCD_StopCrypto1();
@@ -212,12 +205,12 @@ void loop()
     client.publish(topic_car, "nothing");
     digitalWrite(ledPin, LOW);
   } else if (distance <= 10 && distance > 5) {
-    // TODO 9 : ส่งข้อความว่า nothing ไปที่ topic_car และสั่ง buzzer เล่นสัญญาณเตือน
+    // TODO 9 : ส่งข้อความว่า nothing ไปที่ topic_car และสั่ง buzzer เล่นสัญญาณเตือน (LOW = ดัง)
     client.publish(topic_car, "nothing");
     digitalWrite(ledPin, LOW);
-    digitalWrite(buzzerPin, BUZZER_ON);
+    digitalWrite(buzzerPin, LOW);
     delay(100);
-    digitalWrite(buzzerPin, BUZZER_OFF);
+    digitalWrite(buzzerPin, HIGH);
     delay(100);
   } else {
     // TODO 10 : ส่งข้อความว่า hit ไปที่ topic_car

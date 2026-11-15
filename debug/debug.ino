@@ -32,7 +32,7 @@ Servo myservo;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-int buzzerOff = LOW;   // changes to HIGH if the buzzer test finds an active-low module
+int buzzerOff = HIGH;  // the project buzzer is active low (LOW = on); changes to LOW if the test finds an active-high one
 
 enum Result { R_PASS, R_FAIL, R_WARN, R_LOOK, R_SKIP };
 const char* resultName[] = {"PASS", "FAIL", "WARN", "LOOK", "SKIP"};
@@ -200,13 +200,13 @@ Result testBuzzer()
   if (c == 'a') {
     buzzerOff = LOW;
     digitalWrite(buzzerPin, buzzerOff);
-    Serial.println("  PASS: active-HIGH buzzer. Use HIGH = on, LOW = off (the default).");
-    return R_PASS;
+    Serial.println("  WARN: active-HIGH buzzer, but the project code expects active LOW. Swap HIGH/LOW for the buzzer.");
+    return R_WARN;
   }
   if (c == 'b') {
     buzzerOff = HIGH;
     digitalWrite(buzzerPin, buzzerOff);
-    Serial.println("  PASS: active-LOW buzzer. Use LOW = on, HIGH = off in your code.");
+    Serial.println("  PASS: active-LOW buzzer (LOW = on, HIGH = off), as the project code expects.");
     return R_PASS;
   }
   if (c == 'n') {

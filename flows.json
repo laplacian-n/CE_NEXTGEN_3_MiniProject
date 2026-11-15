@@ -149,8 +149,8 @@
         "type": "function",
         "z": "3814150a5ea8e260",
         "name": "UID to name",
-        "func": "// วางโค้ดจากสไลด์ Session 2\nreturn msg;",
-        "outputs": 1,
+        "func": "// ใส่ UID ของบัตรที่มีสิทธิ์เข้า (ตัวพิมพ์ใหญ่ ตามที่ขึ้นใน Serial Monitor) และชื่อเจ้าของบัตร\nconst names = {\n    \"XXXXXXXX\": \"ชื่อสมาชิก\",\n};\nconst name = names[msg.payload];\nif (name) {\n    return [{ payload: name }, { payload: \"open\" }];   // บัตรที่มีสิทธิ์: แสดงชื่อ + สั่งเปิดประตู\n}\nreturn [{ payload: \"ไม่มีสิทธิ์: \" + msg.payload }, null];   // บัตรอื่น: แสดงว่าไม่มีสิทธิ์ ไม่เปิด",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -161,6 +161,9 @@
         "wires": [
             [
                 "43028842bcf07206"
+            ],
+            [
+                "18034c4d255cd10d"
             ]
         ]
     },

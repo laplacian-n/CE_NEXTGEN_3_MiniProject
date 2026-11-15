@@ -17,7 +17,7 @@ String rfidUID = "";    // เอาไว้รับ UserID ที่สแก
 #define ECHO_PIN 2      // ESP32 pin D2 เชื่อมต่อกับ Echo pin (ไฟสีฟ้าบนบอร์ดจะกะพริบตอนวัดระยะ)
 
 #define ledPin 27       // Pin ของ  LED แสดงสถานะไฟ
-#define buzzerPin 13    // Pin ควบคุมการแสดง Buzzer
+#define buzzerPin 13    // Pin ควบคุมการแสดง Buzzer (active low: LOW = ดัง, HIGH = เงียบ)
 
 float duration_us, distance_cm;
 
@@ -93,7 +93,7 @@ void callback(char *topic, byte *payload, unsigned int length) {  //ฟังก
   Serial.println("-----------------------");
 
   if (strcmp(topic, topic_servo) == 0) {
-    // TODO 3.5 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด
+    // TODO 3 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด (Node-RED ส่งมาเมื่อบัตรมีสิทธิ์)
   }
 }
 
@@ -143,7 +143,7 @@ void setup()
 
   // Buzzer
   pinMode(buzzerPin, OUTPUT);
-  digitalWrite(buzzerPin, LOW);   // ถ้า buzzer ดังค้างตั้งแต่เปิดเครื่อง แปลว่าเป็นแบบ LOW = ดัง ให้สลับ HIGH/LOW
+  digitalWrite(buzzerPin, HIGH);  // HIGH = เงียบ
 }
 
 void loop()
@@ -169,8 +169,6 @@ void loop()
 
       // TODO 2 : ส่งรหัส RFID ที่สแกนได้ไปยัง Topic 'topic_rfid'
 
-      // TODO 3 : เปิดประตู 2 วินาที และปิด
-
       // หยุดการ์ดใบนี้
       rfid.PICC_HaltA();
       rfid.PCD_StopCrypto1();
@@ -185,7 +183,7 @@ void loop()
   } else if (distance <= 20 && distance > 10) {
     // TODO 8 : ส่งข้อความว่า nothing ไปที่ topic_car และสั่ง logic low ให้ LED
   } else if (distance <= 10 && distance > 5) {
-    // TODO 9 : ส่งข้อความว่า nothing ไปที่ topic_car และสั่ง buzzer เล่นสัญญาณเตือน
+    // TODO 9 : ส่งข้อความว่า nothing ไปที่ topic_car และสั่ง buzzer เล่นสัญญาณเตือน (LOW = ดัง)
   } else {
     // TODO 10 : ส่งข้อความว่า hit ไปที่ topic_car
   }
