@@ -120,6 +120,11 @@ void reconnect() {  //ฟังก์ชั่นเชื่อมต่อmqtt
 void setup()
 {
   Serial.begin(115200);
+
+  // Buzzer (ตั้งก่อนต่อ WiFi ไม่งั้นระหว่างรอเชื่อมต่อ buzzer จะดังค้าง)
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(buzzerPin, HIGH);  // HIGH = เงียบ
+
   setup_wifi(); //เชื่อมต่อwifi
   reconnect();  //เชื่อมต่อmqtt
   client.subscribe(topic_servo);  //กำหนด topic ที่จะ subscribe
@@ -140,10 +145,6 @@ void setup()
   // LED
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
-
-  // Buzzer
-  pinMode(buzzerPin, OUTPUT);
-  digitalWrite(buzzerPin, HIGH);  // HIGH = เงียบ
 }
 
 void loop()
