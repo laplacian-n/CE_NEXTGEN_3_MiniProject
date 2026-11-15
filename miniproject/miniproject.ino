@@ -32,8 +32,8 @@ MFRC522 rfid(SS_PIN, RST_PIN);  // Create MFRC522 instance
 WiFiClient   espClient;                     //คำสั่งจาก library
 PubSubClient client(espClient);             //สร้างออปเจ็ค สำหรับเชื่อมต่อ mqtt
 //=================================================================================================
-const char* ssid = "CEnextgen#3";                 //wifi name
-const char* password = "CEnextgen#3";             //wifi password
+const char* ssid = "CE_NEXTGEN#4_MCI_2.4GHz";     //wifi name
+const char* password = "cenextgenMCI809";         //wifi password
 //=================================================================================================
 const char* mqtt_broker = "broker.emqx.io";       //IP mqtt server
 const int   mqtt_port = 1883;                     //port mqtt server

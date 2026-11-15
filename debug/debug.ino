@@ -20,8 +20,8 @@
 #define buzzerPin 13
 const int ServoPin = 33;
 
-const char* ssid = "CEnextgen#3";
-const char* password = "CEnextgen#3";
+const char* ssid = "CE_NEXTGEN#4_MCI_2.4GHz";
+const char* password = "cenextgenMCI809";
 const char* mqtt_broker = "broker.emqx.io";
 const int   mqtt_port = 1883;
 
