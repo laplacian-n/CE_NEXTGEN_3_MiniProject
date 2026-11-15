@@ -15,6 +15,7 @@
 | `debug/` | เครื่องมือหาปัญหา แยกเป็น `hardware/` (โค้ดเช็คอุปกรณ์บนบอร์ด), `network/` (เช็คการต่อ MQTT broker), `nodered/` (เช็ค/ติดตั้ง Node-RED) ดูวิธีใช้ใน [debug/README.md](debug/README.md) ผลเป็นภาษาอังกฤษ |
 | `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า dashboard ไว้แล้ว เหลือเลือก Server, แก้ชื่อกลุ่ม และวางโค้ดใน function |
 | `solution/` | เฉลย |
+| `slides/` | สไลด์ประกอบการสอน (เก็บด้วย Git LFS ถ้า clone แล้วได้ไฟล์เล็กผิดปกติ ให้รัน `git lfs pull`) |
 
 ## อุปกรณ์และ Library
 
