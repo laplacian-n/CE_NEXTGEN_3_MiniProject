@@ -1,12 +1,12 @@
-"""ทดสอบ MQTT broker ว่าใช้งานได้จริงที่ host/port ที่กำหนด — ไม่ต้องลง library เพิ่ม
+"""ทดสอบ MQTT broker ว่าใช้งานได้จริงที่ host/port ที่กำหนด - ไม่ต้องลง library เพิ่ม
 
 ใช้:  python test_broker.py [host] [port] [topic]
 ค่าเริ่มต้น: broker.emqx.io 1883 CENEXTGEN3/teacher/test
 
 ทดสอบ 3 ขั้น:
-  1. DNS   — หา IP ของ host ได้ไหม
-  2. TCP   — เปิดพอร์ตได้ไหม (เน็ต/ไฟร์วอลล์บล็อกหรือเปล่า)
-  3. MQTT  — CONNECT แล้ว subscribe + publish ข้อความเข้า topic ตัวเอง แล้วรอรับกลับ
+  1. DNS   - หา IP ของ host ได้ไหม
+  2. TCP   - เปิดพอร์ตได้ไหม (เน็ต/ไฟร์วอลล์บล็อกหรือเปล่า)
+  3. MQTT  - CONNECT แล้ว subscribe + publish ข้อความเข้า topic ตัวเอง แล้วรอรับกลับ
 """
 import os
 import socket
@@ -86,7 +86,7 @@ def main():
     try:
         ip = socket.gethostbyname(HOST)
     except socket.gaierror as e:
-        fail(f"หา IP ของ {HOST} ไม่ได้ ({e}) — เช็คอินเทอร์เน็ต/สะกดชื่อ")
+        fail(f"หา IP ของ {HOST} ไม่ได้ ({e}) - เช็คอินเทอร์เน็ต/สะกดชื่อ")
     ok(f"{HOST} -> {ip}")
 
     print("2) TCP")
@@ -94,7 +94,7 @@ def main():
     try:
         sock = socket.create_connection((HOST, PORT), timeout=TIMEOUT)
     except OSError as e:
-        fail(f"เปิดพอร์ต {PORT} ไม่ได้ ({e}) — พอร์ตผิด หรือเน็ตบล็อกพอร์ตนี้")
+        fail(f"เปิดพอร์ต {PORT} ไม่ได้ ({e}) - พอร์ตผิด หรือเน็ตบล็อกพอร์ตนี้")
     ok(f"เปิดพอร์ต {PORT} ได้ ({(time.time() - t0) * 1000:.0f} ms)")
 
     print("3) MQTT")
@@ -106,9 +106,9 @@ def main():
     try:
         ptype, data = read_packet(sock)
     except (socket.timeout, ConnectionError) as e:
-        fail(f"พอร์ตเปิดแต่ไม่ตอบแบบ MQTT ({e}) — พอร์ตนี้อาจไม่ใช่ MQTT")
+        fail(f"พอร์ตเปิดแต่ไม่ตอบแบบ MQTT ({e}) - พอร์ตนี้อาจไม่ใช่ MQTT")
     if ptype != 2:
-        fail(f"ได้แพ็กเก็ตชนิด {ptype} แทน CONNACK — พอร์ตนี้ไม่ใช่ MQTT")
+        fail(f"ได้แพ็กเก็ตชนิด {ptype} แทน CONNACK - พอร์ตนี้ไม่ใช่ MQTT")
     if data[1] != 0:
         fail(f"broker ปฏิเสธ: {CONNACK_CODES.get(data[1], data[1])}")
     ok(f"CONNECT สำเร็จ (client id {client_id})")

@@ -1,4 +1,4 @@
-// เฉลยสำหรับผู้สอน — อิงจาก miniproject.ino ใน github.com/17punchisama/CE_NEXTGEN_3
+// เฉลยสำหรับผู้สอน - อิงจาก miniproject.ino ใน github.com/17punchisama/CE_NEXTGEN_3
 // ทุกจุดที่เติมมีป้าย TODO เดิมกำกับไว้
 #include <WiFi.h>
 #include <PubSubClient.h>

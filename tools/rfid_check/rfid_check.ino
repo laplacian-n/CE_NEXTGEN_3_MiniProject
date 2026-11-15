@@ -1,4 +1,4 @@
-// โค้ดเช็คเครื่องอ่าน RFID-RC522 ทีละขั้น — ใช้ขาเดียวกับ miniproject.ino
+// โค้ดเช็คเครื่องอ่าน RFID-RC522 ทีละขั้น - ใช้ขาเดียวกับ miniproject.ino
 // เปิด Serial Monitor ที่ 115200 แล้วกด EN เพื่อดูผลตั้งแต่ต้น
 #include <SPI.h>
 #include <MFRC522.h>
@@ -44,7 +44,7 @@ bool checkVersion()
   return false;
 }
 
-// ขั้น 2: เขียนค่าลง register แล้วอ่านกลับ (ทดสอบ MOSI — ขั้น 1 ผ่านได้แม้ MOSI ต่อผิด)
+// ขั้น 2: เขียนค่าลง register แล้วอ่านกลับ (ทดสอบ MOSI - ขั้น 1 ผ่านได้แม้ MOSI ต่อผิด)
 bool checkWriteRead()
 {
   Serial.println("[2] เขียน-อ่าน register (ModWidthReg)");
@@ -100,7 +100,7 @@ void setup()
 
 void loop()
 {
-  // ขั้น 4: ลองแตะบัตร — แสดงทุกอย่างที่อ่านได้ รวมถึงการอ่านที่ผิดปกติ
+  // ขั้น 4: ลองแตะบัตร - แสดงทุกอย่างที่อ่านได้ รวมถึงการอ่านที่ผิดปกติ
   if (!rfid.PICC_IsNewCardPresent()) return;
 
   if (!rfid.PICC_ReadCardSerial()) {
