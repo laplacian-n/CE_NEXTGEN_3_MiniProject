@@ -22,8 +22,10 @@ const int ServoPin = 33;
 
 const char* ssid = "CE_NEXTGEN#4_MCI_2.4GHz";
 const char* password = "cenextgenMCI809";
-const char* mqtt_broker = "broker.emqx.io";
+const char* mqtt_broker = "mqtt.ce-esl.com";
 const int   mqtt_port = 1883;
+const char* mqtt_user = "";   // same username / password as in miniproject.ino
+const char* mqtt_pass = "";
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 Servo myservo;
@@ -235,8 +237,12 @@ Result testNetwork()
 
   client.setServer(mqtt_broker, mqtt_port);
   String id = "esp32-debug-" + WiFi.macAddress();
-  if (!client.connect(id.c_str())) {
-    Serial.printf("  FAIL: WiFi works but the broker refused (state %d). The network may block port 1883.\n", client.state());
+  if (strlen(mqtt_user) == 0) Serial.println("  note: mqtt_user is empty, the broker will probably refuse");
+  if (!client.connect(id.c_str(), mqtt_user, mqtt_pass)) {
+    int st = client.state();
+    if (st == 4) Serial.println("  FAIL: wrong mqtt_user / mqtt_pass (letter case matters).");
+    else if (st == 5) Serial.println("  FAIL: this mqtt_user is not allowed on the broker.");
+    else Serial.printf("  FAIL: WiFi works but the broker did not answer (state %d). The network may block port 1883.\n", st);
     return R_FAIL;
   }
   client.publish("CENEXTGEN3/debug", "hello from debug.ino");

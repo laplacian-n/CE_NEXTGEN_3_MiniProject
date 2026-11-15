@@ -31,6 +31,7 @@ Servo myservo;
 MFRC522 rfid(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
 // TODO 1 : ตั้งชื่อกลุ่ม (ภาษาอังกฤษ ไม่มีเว้นวรรค ห้ามซ้ำกลุ่มอื่น) แล้วใช้ชื่อเดียวกันใน Node-RED
+//          และใส่ username / password ของ MQTT ด้านล่าง (ชุดเดียวกับที่ใส่ใน Node-RED)
 #define GROUP_NAME "group1"
 //=================================================================================================
 WiFiClient   espClient;                     //คำสั่งจาก library
@@ -39,8 +40,10 @@ PubSubClient client(espClient);             //สร้างออปเจ็�
 const char* ssid = "CE_NEXTGEN#4_MCI_2.4GHz";     //wifi name
 const char* password = "cenextgenMCI809";         //wifi password
 //=================================================================================================
-const char* mqtt_broker = "broker.emqx.io";       //IP mqtt server
+const char* mqtt_broker = "mqtt.ce-esl.com";      //IP mqtt server
 const int   mqtt_port = 1883;                     //port mqtt server
+const char* mqtt_user = "";                       //mqtt username
+const char* mqtt_pass = "";                       //mqtt password
 const char* topic_rfid = "CENEXTGEN3/" GROUP_NAME "/rfid";     //Topic for RFID
 const char* topic_servo = "CENEXTGEN3/" GROUP_NAME "/servo";   //Topic for control servo
 const char* topic_car = "CENEXTGEN3/" GROUP_NAME "/car";       //Topic for sending notification if car was hit
@@ -120,12 +123,14 @@ void reconnect() {  //ฟังก์ชั่นเชื่อมต่อmqtt
   {
     String client_id = "esp32-client-";
     client_id += String(WiFi.macAddress());
-    Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
-    if (client.connect(client_id.c_str()))
-      Serial.println("Public emqx mqtt broker connected");
+    Serial.printf("The client %s connects to %s\n", client_id.c_str(), mqtt_broker);
+    if (client.connect(client_id.c_str(), mqtt_user, mqtt_pass))
+      Serial.println("mqtt broker connected");
     else {
       Serial.print("failed with state ");
-      Serial.print(client.state());
+      Serial.println(client.state());
+      if (client.state() == 4 || client.state() == 5)   //4 = รหัสผิด, 5 = ไม่มีสิทธิ์
+        Serial.println("check mqtt_user / mqtt_pass");
       delay(2000);
     }
   }
