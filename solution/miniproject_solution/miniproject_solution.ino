@@ -137,7 +137,6 @@ void setup()
   setup_wifi(); //เชื่อมต่อwifi
   reconnect();  //เชื่อมต่อmqtt
   client.subscribe(topic_servo);  //กำหนด topic ที่จะ subscribe
-  // TODO 1.5 : ใส่ชื่อกลุ่ม
   client.publish(topic_rfid, "กรุณาสแกน RFID เพื่อยืนยันตัวตน (" GROUP_NAME ")"); //กำหนด topic ที่จะ publish
 
   // SPI ของ RC522
