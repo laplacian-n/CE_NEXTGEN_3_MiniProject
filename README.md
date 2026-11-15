@@ -17,6 +17,7 @@
 | `flows.json` | Flow ของ Node-RED ต่อสายและตั้งค่า dashboard ไว้แล้ว เหลือเลือก Server, แก้ชื่อกลุ่ม และวางโค้ดใน function |
 | `solution/` | เฉลย |
 | `tools/test_broker.py` | เช็คว่าเน็ตต่อ MQTT broker พอร์ต 1883 ได้ไหม |
+| `tools/test_mqtt.py` | เช็ค broker ที่ต้องใช้ username/password ได้ทั้งแบบ `mqtt://` (พอร์ต 1883 แบบเดียวกับ ESP32) และ `wss://` (แบบ MQTTX / Node-RED) |
 | `tools/listen_topic.py` | ดักฟังข้อความใน topic ดูว่าบอร์ดส่งข้อความออกมาจริงไหม |
 | `tools/rfid_check/` | เช็คเครื่องอ่าน RFID ทีละขั้น บอกว่าต้องแก้สายเส้นไหน |
 
@@ -71,4 +72,11 @@ Arduino IDE: เลือกบอร์ด **ESP32 Dev Module** แล้วต
 
 ```bash
 python tools/test_broker.py broker.emqx.io 1883
+```
+
+ถ้า broker ต้องใช้ username/password (password จะถามตอนรัน ไม่ต้องพิมพ์ลงในคำสั่ง):
+
+```bash
+python tools/test_mqtt.py mqtt://mqtt.ce-esl.com:1883 ชื่อผู้ใช้
+python tools/test_mqtt.py wss://mqtt.ce-esl.com:443/mqtt ชื่อผู้ใช้
 ```
