@@ -51,13 +51,13 @@ const int DOOR_CLOSE_ANGLE = 0;
 
 void openDoor()
 {
-    // TODO 4 : สั่งให้ Servo เปิดประตู
+    // TODO 3 : สั่งให้ Servo เปิดประตู
     myservo.write(DOOR_OPEN_ANGLE);
 }
 
 void closeDoor()
 {
-    // TODO 5 : สั่งให้ Servo ปิดประตู
+    // TODO 4 : สั่งให้ Servo ปิดประตู
     myservo.write(DOOR_CLOSE_ANGLE);
 }
 
@@ -105,7 +105,7 @@ void callback(char *topic, byte *payload, unsigned int length) {  //ฟังก
   Serial.println("-----------------------");
 
   if (strcmp(topic, topic_servo) == 0) {
-    // TODO 3 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด (Node-RED ส่งมาเมื่อบัตรมีสิทธิ์)
+    // TODO 5 : ถ้าข้อความที่ได้เป็นคำว่า "open" เปิดประตู 2 วินาที และปิด (Node-RED ส่งมาเมื่อบัตรมีสิทธิ์)
     if (message == "open") {
       openDoor();
       delay(2000);
